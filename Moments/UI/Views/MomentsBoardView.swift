@@ -61,15 +61,6 @@ struct MomentsBoardView: View {
             .navigationTitle("Moments")
             .searchable(text: $searchText, prompt: "Search moments")
             .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Button {
-                        LiveActivityManager.shared.createTestActivity()
-                    } label: {
-                        Image(systemName: "testtube.2")
-                            .foregroundStyle(.orange)
-                    }
-                }
-                
                 ToolbarItem(placement: .primaryAction) {
                     Menu {
                         Picker("Filter", selection: $selectedSegment) {
