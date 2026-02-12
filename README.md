@@ -111,8 +111,3 @@ MomentsApp/
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Acknowledgments
-
-- Built with SwiftUI and modern iOS frameworks
-- Inspired by the need to track life's precious moments
-
