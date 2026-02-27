@@ -10,6 +10,7 @@
 		B13C99A42F3DA53400BBBD97 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1E0E3C92F3D53A900969304 /* WidgetKit.framework */; };
 		B13C99A52F3DA53400BBBD97 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1E0E3CB2F3D53A900969304 /* SwiftUI.framework */; };
 		B13C99B62F3DA53500BBBD97 /* MomentsWidgetsExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = B13C99A32F3DA53400BBBD97 /* MomentsWidgetsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		B17BBB3C2F51843400810F56 /* MomentsWatch Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = B17BBB322F51843200810F56 /* MomentsWatch Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -20,9 +21,27 @@
 			remoteGlobalIDString = B13C99A22F3DA53400BBBD97;
 			remoteInfo = MomentsWidgetsExtension;
 		};
+		B17BBB3A2F51843400810F56 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B1E0E39B2F3D4E4400969304 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B17BBB312F51843200810F56;
+			remoteInfo = "MomentsWatch Watch App";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		B17BBB402F51843400810F56 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				B17BBB3C2F51843400810F56 /* MomentsWatch Watch App.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B1E0E3E22F3D53AA00969304 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -39,6 +58,7 @@
 /* Begin PBXFileReference section */
 		B13C99A32F3DA53400BBBD97 /* MomentsWidgetsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MomentsWidgetsExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		B13D8D102F3D80BE00CB69A5 /* MomentsWidgetsExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MomentsWidgetsExtension.entitlements; sourceTree = "<group>"; };
+		B17BBB322F51843200810F56 /* MomentsWatch Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MomentsWatch Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1E0E3A32F3D4E4400969304 /* Moments.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Moments.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1E0E3C92F3D53A900969304 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		B1E0E3CB2F3D53A900969304 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -70,6 +90,11 @@
 			path = MomentsWidgets;
 			sourceTree = "<group>";
 		};
+		B17BBB332F51843200810F56 /* MomentsWatch Watch App */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "MomentsWatch Watch App";
+			sourceTree = "<group>";
+		};
 		B1E0E3A52F3D4E4400969304 /* Moments */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
@@ -90,6 +115,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B17BBB2F2F51843200810F56 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B1E0E3A02F3D4E4400969304 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -105,6 +137,7 @@
 			children = (
 				B1E0E3A52F3D4E4400969304 /* Moments */,
 				B13C99A62F3DA53400BBBD97 /* MomentsWidgets */,
+				B17BBB332F51843200810F56 /* MomentsWatch Watch App */,
 				B1E0E3C82F3D53A900969304 /* Frameworks */,
 				B1E0E3A42F3D4E4400969304 /* Products */,
 				B13D8D102F3D80BE00CB69A5 /* MomentsWidgetsExtension.entitlements */,
@@ -116,6 +149,7 @@
 			children = (
 				B1E0E3A32F3D4E4400969304 /* Moments.app */,
 				B13C99A32F3DA53400BBBD97 /* MomentsWidgetsExtension.appex */,
+				B17BBB322F51843200810F56 /* MomentsWatch Watch App.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -154,6 +188,28 @@
 			productReference = B13C99A32F3DA53400BBBD97 /* MomentsWidgetsExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
+		B17BBB312F51843200810F56 /* MomentsWatch Watch App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B17BBB3D2F51843400810F56 /* Build configuration list for PBXNativeTarget "MomentsWatch Watch App" */;
+			buildPhases = (
+				B17BBB2E2F51843200810F56 /* Sources */,
+				B17BBB2F2F51843200810F56 /* Frameworks */,
+				B17BBB302F51843200810F56 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				B17BBB332F51843200810F56 /* MomentsWatch Watch App */,
+			);
+			name = "MomentsWatch Watch App";
+			packageProductDependencies = (
+			);
+			productName = "MomentsWatch Watch App";
+			productReference = B17BBB322F51843200810F56 /* MomentsWatch Watch App.app */;
+			productType = "com.apple.product-type.application";
+		};
 		B1E0E3A22F3D4E4400969304 /* Moments */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = B1E0E3AE2F3D4E4400969304 /* Build configuration list for PBXNativeTarget "Moments" */;
@@ -162,11 +218,13 @@
 				B1E0E3A02F3D4E4400969304 /* Frameworks */,
 				B1E0E3A12F3D4E4400969304 /* Resources */,
 				B1E0E3E22F3D53AA00969304 /* Embed Foundation Extensions */,
+				B17BBB402F51843400810F56 /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				B13C99B52F3DA53500BBBD97 /* PBXTargetDependency */,
+				B17BBB3B2F51843400810F56 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				B1E0E3A52F3D4E4400969304 /* Moments */,
@@ -185,11 +243,14 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 2600;
+				LastSwiftUpdateCheck = 2620;
 				LastUpgradeCheck = 2620;
 				TargetAttributes = {
 					B13C99A22F3DA53400BBBD97 = {
 						CreatedOnToolsVersion = 26.0;
+					};
+					B17BBB312F51843200810F56 = {
+						CreatedOnToolsVersion = 26.2;
 					};
 					B1E0E3A22F3D4E4400969304 = {
 						CreatedOnToolsVersion = 26.0;
@@ -212,12 +273,20 @@
 			targets = (
 				B1E0E3A22F3D4E4400969304 /* Moments */,
 				B13C99A22F3DA53400BBBD97 /* MomentsWidgetsExtension */,
+				B17BBB312F51843200810F56 /* MomentsWatch Watch App */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		B13C99A12F3DA53400BBBD97 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B17BBB302F51843200810F56 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -241,6 +310,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B17BBB2E2F51843200810F56 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B1E0E39F2F3D4E4400969304 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -256,6 +332,11 @@
 			target = B13C99A22F3DA53400BBBD97 /* MomentsWidgetsExtension */;
 			targetProxy = B13C99B42F3DA53500BBBD97 /* PBXContainerItemProxy */;
 		};
+		B17BBB3B2F51843400810F56 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B17BBB312F51843200810F56 /* MomentsWatch Watch App */;
+			targetProxy = B17BBB3A2F51843400810F56 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
@@ -267,7 +348,7 @@
 				CODE_SIGN_ENTITLEMENTS = MomentsWidgetsExtension.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = VCZ6LUVE4J;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MomentsWidgets/Info.plist;
@@ -278,7 +359,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.Josh.Moments.MomentsWidgets;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -303,7 +384,7 @@
 				CODE_SIGN_ENTITLEMENTS = MomentsWidgetsExtension.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = VCZ6LUVE4J;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MomentsWidgets/Info.plist;
@@ -314,7 +395,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.Josh.Moments.MomentsWidgets;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -328,6 +409,76 @@
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		B17BBB3E2F51843400810F56 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = icon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "MomentsWatch Watch App/MomentsWatch Watch App.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3;
+				DEVELOPMENT_TEAM = VCZ6LUVE4J;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = MomentsWatch;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.Josh.Moments;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Josh.Moments.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 26.0;
+			};
+			name = Debug;
+		};
+		B17BBB3F2F51843400810F56 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = icon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "MomentsWatch Watch App/MomentsWatch Watch App.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3;
+				DEVELOPMENT_TEAM = VCZ6LUVE4J;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = MomentsWatch;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.Josh.Moments;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Josh.Moments.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 26.0;
 			};
 			name = Release;
 		};
@@ -462,7 +613,7 @@
 				CODE_SIGN_ENTITLEMENTS = Moments/Moments.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = VCZ6LUVE4J;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -481,7 +632,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.Josh.Moments;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -507,7 +658,7 @@
 				CODE_SIGN_ENTITLEMENTS = Moments/Moments.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = VCZ6LUVE4J;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -526,7 +677,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.Josh.Moments;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -552,6 +703,15 @@
 			buildConfigurations = (
 				B13C99B82F3DA53500BBBD97 /* Debug */,
 				B13C99B92F3DA53500BBBD97 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B17BBB3D2F51843400810F56 /* Build configuration list for PBXNativeTarget "MomentsWatch Watch App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B17BBB3E2F51843400810F56 /* Debug */,
+				B17BBB3F2F51843400810F56 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -46,6 +46,8 @@ struct ContentView: View {
             configureTabBarAppearance()
             // Share moments with widgets on app launch
             WidgetDataManager.shared.shareMomentsWithWidgets(allMoments)
+            // Sync with Apple Watch
+            WatchConnectivityManager.shared.sendMomentsToWatch(allMoments)
         }
         .onChange(of: scenePhase) { _, newPhase in
             if newPhase == .active {
@@ -54,11 +56,15 @@ struct ContentView: View {
                 
                 // Share data with widgets
                 WidgetDataManager.shared.shareMomentsWithWidgets(allMoments)
+                // Sync with Apple Watch
+                WatchConnectivityManager.shared.sendMomentsToWatch(allMoments)
             }
         }
         .onChange(of: allMoments) { _, newMoments in
             // Share updated moments with widgets whenever data changes
             WidgetDataManager.shared.shareMomentsWithWidgets(newMoments)
+            // Sync with Apple Watch
+            WatchConnectivityManager.shared.sendMomentsToWatch(newMoments)
         }
     }
     

@@ -9,6 +9,7 @@ struct SettingsView: View {
     @AppStorage("hasCompletedOnboarding") private var hasCompletedOnboarding = false
     @State private var notificationStatus: UNAuthorizationStatus = .notDetermined
     @State private var showOnboarding = false
+    @StateObject private var watchManager = WatchConnectivityManager.shared
     
     var body: some View {
         NavigationStack {
@@ -56,6 +57,106 @@ struct SettingsView: View {
                 } footer: {
                     Text("These settings apply to newly created moments")
                         .font(.caption)
+                }
+                
+                // Apple Watch Section
+                Section {
+                    if watchManager.isSupported && watchManager.isWatchPaired {
+                        // Watch is paired - show detailed status
+                        HStack {
+                            Image(systemName: "applewatch")
+                                .font(.title2)
+                                .foregroundStyle(.green)
+                                .frame(width: 32)
+                            
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text("Apple Watch")
+                                Text("Connected")
+                                    .font(.caption)
+                                    .foregroundStyle(.secondary)
+                            }
+                            
+                            Spacer()
+                            
+                            Image(systemName: "checkmark.circle.fill")
+                                .foregroundStyle(.green)
+                        }
+                        
+                        HStack {
+                            Image(systemName: "app.badge")
+                                .font(.title2)
+                                .foregroundStyle(watchManager.isWatchAppInstalled ? .blue : .secondary)
+                                .frame(width: 32)
+                            
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text("App Installed")
+                                Text(watchManager.isWatchAppInstalled ? "Ready to sync" : "Install from Watch app")
+                                    .font(.caption)
+                                    .foregroundStyle(.secondary)
+                            }
+                            
+                            Spacer()
+                            
+                            Image(systemName: watchManager.isWatchAppInstalled ? "checkmark.circle.fill" : "xmark.circle.fill")
+                                .foregroundStyle(watchManager.isWatchAppInstalled ? .green : .orange)
+                        }
+                        
+                        if watchManager.isWatchAppInstalled {
+                            HStack {
+                                Image(systemName: "antenna.radiowaves.left.and.right")
+                                    .font(.title2)
+                                    .foregroundStyle(watchManager.isReachable ? .green : .secondary)
+                                    .frame(width: 32)
+                                
+                                VStack(alignment: .leading, spacing: 4) {
+                                    Text("Reachable")
+                                    Text(watchManager.isReachable ? "Watch is nearby" : "Watch not in range")
+                                        .font(.caption)
+                                        .foregroundStyle(.secondary)
+                                }
+                                
+                                Spacer()
+                                
+                                Circle()
+                                    .fill(watchManager.isReachable ? .green : .gray)
+                                    .frame(width: 10, height: 10)
+                            }
+                            
+                            if let lastSync = watchManager.lastSyncDate {
+                                HStack {
+                                    Image(systemName: "arrow.triangle.2.circlepath")
+                                        .font(.title2)
+                                        .foregroundStyle(.secondary)
+                                        .frame(width: 32)
+                                    
+                                    VStack(alignment: .leading, spacing: 4) {
+                                        Text("Last Synced")
+                                        Text(lastSync, style: .relative)
+                                            .font(.caption)
+                                            .foregroundStyle(.secondary)
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        // No watch paired - simple message
+                        HStack {
+                            Image(systemName: "applewatch.slash")
+                                .font(.title2)
+                                .foregroundStyle(.secondary)
+                                .frame(width: 32)
+                            
+                            Text("No Apple Watch connected")
+                                .foregroundStyle(.secondary)
+                        }
+                    }
+                } header: {
+                    Text("Apple Watch")
+                } footer: {
+                    if watchManager.isWatchAppInstalled {
+                        Text("Moments sync automatically when you open this app")
+                            .font(.caption)
+                    }
                 }
                 
                 // Onboarding Section
