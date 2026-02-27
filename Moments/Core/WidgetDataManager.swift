@@ -16,6 +16,7 @@ class WidgetDataManager {
                 id: moment.id.uuidString,
                 title: moment.title,
                 targetDate: moment.targetDate,
+                createdDate: moment.createdDate,
                 accentColorHex: moment.accentColorHex,
                 symbolName: moment.symbolName
             )
@@ -46,6 +47,7 @@ struct SimpleMoment: Codable, Identifiable {
     let id: String
     let title: String
     let targetDate: Date
+    let createdDate: Date
     let accentColorHex: String
     let symbolName: String
 }

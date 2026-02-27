@@ -14,6 +14,7 @@ struct SimpleMoment: Codable, Identifiable {
     let id: String
     let title: String
     let targetDate: Date
+    let createdDate: Date
     let accentColorHex: String
     let symbolName: String
     
@@ -26,10 +27,9 @@ struct SimpleMoment: Codable, Identifiable {
     }
     
     var progress: Double {
-        // Estimate creation date (30 days ago for fallback)
-        let estimatedCreationDate = Date().addingTimeInterval(-86400 * 30)
-        let totalDuration = targetDate.timeIntervalSince(estimatedCreationDate)
-        let elapsed = Date().timeIntervalSince(estimatedCreationDate)
+        // Use actual creation date for accurate progress
+        let totalDuration = targetDate.timeIntervalSince(createdDate)
+        let elapsed = Date().timeIntervalSince(createdDate)
         let rawProgress = elapsed / totalDuration
         
         // Use minimum progress to ensure visibility
@@ -64,26 +64,30 @@ struct SimpleMomentsProvider: TimelineProvider {
         let moments = loadMoments()
         let now = Date()
         
-        // Create entries for next few updates
+        // With native Text(timerInterval:) handling countdown displays,
+        // we only need to refresh for progress ring updates
+        // Timeline updates are now much less frequent since countdown is automatic
+        
         var entries: [SimpleMomentsEntry] = []
         
-        // More frequent updates for better countdown accuracy
+        // Determine update interval based on nearest moment
+        // Progress ring needs occasional updates, but not as frequent as manual countdown
         let updateInterval: TimeInterval
         if let firstMoment = moments.first {
             let timeRemaining = firstMoment.timeRemaining
             if timeRemaining < 3600 { // Less than 1 hour
-                updateInterval = 60 // Update every minute
+                updateInterval = 300 // Update every 5 minutes for progress ring
             } else if timeRemaining < 86400 { // Less than 24 hours
-                updateInterval = 300 // Update every 5 minutes
-            } else {
                 updateInterval = 900 // Update every 15 minutes
+            } else {
+                updateInterval = 3600 // Update hourly for long-term events
             }
         } else {
             updateInterval = 3600 // No moments, update hourly
         }
         
-        // Create 20 timeline entries
-        for i in 0..<20 {
+        // Create fewer timeline entries since countdown is handled natively
+        for i in 0..<10 {
             let date = Calendar.current.date(byAdding: .second, value: Int(updateInterval * Double(i)), to: now) ?? now
             entries.append(SimpleMomentsEntry(date: date, moments: moments))
         }
@@ -120,6 +124,7 @@ struct SimpleMomentsProvider: TimelineProvider {
                 id: "sample-1",
                 title: "Sample Birthday",
                 targetDate: Date().addingTimeInterval(86400 * 2),
+                createdDate: Date().addingTimeInterval(-86400 * 5), // Created 5 days ago
                 accentColorHex: "#FF2D55",
                 symbolName: "party.popper.fill"
             ),
@@ -127,6 +132,7 @@ struct SimpleMomentsProvider: TimelineProvider {
                 id: "sample-2", 
                 title: "Sample Meeting",
                 targetDate: Date().addingTimeInterval(3600 * 4),
+                createdDate: Date().addingTimeInterval(-3600 * 2), // Created 2 hours ago
                 accentColorHex: "#007AFF",
                 symbolName: "calendar"
             )
@@ -183,7 +189,8 @@ struct SmallWidgetView: View {
                     .fontWeight(.medium)
                     .lineLimit(1)
                 
-                Text(formatTimeRemaining(moment.timeRemaining))
+                // Native countdown - updates automatically without refresh
+                Text(timerInterval: Date()...moment.targetDate, countsDown: true)
                     .font(.caption2)
                     .fontWeight(.semibold)
                     .foregroundStyle(.secondary)
@@ -260,7 +267,8 @@ struct MediumWidgetView: View {
                             .fontWeight(.medium)
                             .lineLimit(1)
                         
-                        Text(formatTimeRemaining(moment.timeRemaining))
+                        // Native countdown - updates automatically without refresh
+                        Text(timerInterval: Date()...moment.targetDate, countsDown: true)
                             .font(.caption2)
                             .fontWeight(.semibold)
                             .monospacedDigit()
@@ -325,7 +333,8 @@ struct CircularLockView: View {
                     Image(systemName: moment.symbolName)
                         .font(.system(size: 12))
                     
-                    Text(formatTimeRemainingShort(moment.timeRemaining))
+                    // Native countdown for lock screen widget
+                    Text(timerInterval: Date()...moment.targetDate, countsDown: true)
                         .font(.system(size: 8, weight: .semibold, design: .rounded))
                         .monospacedDigit()
                 }
@@ -339,38 +348,8 @@ struct CircularLockView: View {
     }
 }
 
-// MARK: - Time Formatting
-
-private func formatTimeRemaining(_ interval: TimeInterval) -> String {
-    let days = Int(interval) / 86400
-    let hours = Int(interval) % 86400 / 3600
-    let minutes = Int(interval) % 3600 / 60
-    
-    if days > 0 {
-        return "\(days)d \(hours)h"
-    } else if hours > 0 {
-        return "\(hours)h \(minutes)m"
-    } else if minutes > 0 {
-        return "\(minutes)m"
-    } else {
-        return "\(max(0, Int(interval)))s"
-    }
-}
-
-private func formatTimeRemainingShort(_ interval: TimeInterval) -> String {
-    let days = Int(interval) / 86400
-    let hours = Int(interval) % 86400 / 3600
-    let minutes = Int(interval) % 3600 / 60
-    
-    if days > 0 {
-        return "\(days)d"
-    } else if hours > 0 {
-        return "\(hours)h"
-    } else if minutes > 0 {
-        return "\(minutes)m"
-    } else {
-        return "\(max(0, Int(interval)))s"
-    }
-}
+// MARK: - Time Formatting removed
+// Native Text(timerInterval:) is now used for all countdown displays
+// which updates automatically without needing widget refreshes
 
 

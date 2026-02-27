@@ -5,7 +5,8 @@ import SwiftUI
 // Real Moments attributes for countdown
 struct MomentsActivityAttributes: ActivityAttributes {
     struct ContentState: Codable, Hashable {
-        var timeRemaining: TimeInterval
+        // Progress is the only dynamic state we need to update
+        // Time remaining is calculated automatically using native countdown
         var progress: Double
     }
     
@@ -33,13 +34,16 @@ struct MomentsLiveActivity: Widget {
                     Image(systemName: context.attributes.symbolName)
                         .font(.title2)
                         .foregroundStyle(Color(hex: context.attributes.accentColorHex) ?? .blue)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                 }
                 
                 DynamicIslandExpandedRegion(.trailing) {
-                    Text(formattedTime(context.state.timeRemaining))
+                    // Native countdown that updates automatically
+                    Text(timerInterval: Date()...context.attributes.targetDate, countsDown: true)
                         .font(.title3)
                         .fontWeight(.semibold)
                         .monospacedDigit()
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                 }
                 
                 DynamicIslandExpandedRegion(.center) {
@@ -75,10 +79,12 @@ struct MomentsLiveActivity: Widget {
                     .font(.caption)
                     .foregroundStyle(Color(hex: context.attributes.accentColorHex) ?? .blue)
             } compactTrailing: {
-                Text(compactTime(context.state.timeRemaining))
+                // Native countdown for compact view
+                Text(timerInterval: Date()...context.attributes.targetDate, countsDown: true)
                     .font(.caption2)
                     .fontWeight(.medium)
                     .monospacedDigit()
+                    .frame(minWidth: 32)
             } minimal: {
                 Image(systemName: context.attributes.symbolName)
                     .font(.caption2)
@@ -120,7 +126,8 @@ struct MomentsLiveActivity: Widget {
                 Text(context.attributes.title)
                     .font(.headline)
                 
-                Text(detailedTime(context.state.timeRemaining))
+                // Native countdown that updates automatically without refreshing
+                Text(timerInterval: Date()...context.attributes.targetDate, countsDown: true, showsHours: true)
                     .font(.system(size: 28, weight: .bold, design: .rounded))
                     .monospacedDigit()
                     .foregroundStyle(Color(hex: context.attributes.accentColorHex) ?? .blue)
@@ -140,52 +147,8 @@ struct MomentsLiveActivity: Widget {
         .padding()
     }
     
-    // MARK: - Time Formatting Helpers
-    
-    private func formattedTime(_ interval: TimeInterval) -> String {
-        let seconds = Int(interval)
-        let minutes = seconds / 60
-        let hours = minutes / 60
-        let days = hours / 24
-        
-        if days > 0 {
-            return "\(days)d"
-        } else if hours > 0 {
-            return "\(hours)h"
-        } else if minutes > 0 {
-            return "\(minutes)m"
-        } else {
-            return "\(seconds)s"
-        }
-    }
-    
-    private func compactTime(_ interval: TimeInterval) -> String {
-        let seconds = Int(interval)
-        let minutes = seconds / 60
-        let hours = minutes / 60
-        
-        if hours > 0 {
-            return "\(hours)h"
-        } else if minutes > 0 {
-            return "\(minutes)m"
-        } else {
-            return "\(seconds)s"
-        }
-    }
-    
-    private func detailedTime(_ interval: TimeInterval) -> String {
-        let seconds = Int(interval)
-        let minutes = (seconds / 60) % 60
-        let hours = (seconds / 3600) % 24
-        let days = seconds / 86400
-        
-        if days > 0 {
-            return String(format: "%dd %02d:%02d", days, hours, minutes)
-        } else {
-            let secs = seconds % 60
-            return String(format: "%02d:%02d:%02d", hours, minutes, secs)
-        }
-    }
+    // Time formatting helpers removed - using native Text(timerInterval:) instead
+    // which automatically updates without needing widget/activity refreshes
 }
 
 // Color extension for hex support
@@ -226,7 +189,7 @@ extension Color {
 )) {
     MomentsLiveActivity()
 } contentStates: {
-    MomentsActivityAttributes.ContentState(timeRemaining: 7200, progress: 0.3)
-    MomentsActivityAttributes.ContentState(timeRemaining: 3600, progress: 0.6)
-    MomentsActivityAttributes.ContentState(timeRemaining: 600, progress: 0.9)
+    MomentsActivityAttributes.ContentState(progress: 0.3)
+    MomentsActivityAttributes.ContentState(progress: 0.6)
+    MomentsActivityAttributes.ContentState(progress: 0.9)
 }

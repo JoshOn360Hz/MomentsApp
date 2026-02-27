@@ -11,7 +11,8 @@ import Foundation
 
 struct MomentsActivityAttributes: ActivityAttributes, Codable, Hashable {
     public struct ContentState: Codable, Hashable {
-        var timeRemaining: TimeInterval
+        // Progress is the only dynamic state we need to update
+        // Time remaining is calculated automatically using native countdown Text(timerInterval:)
         var progress: Double
     }
     

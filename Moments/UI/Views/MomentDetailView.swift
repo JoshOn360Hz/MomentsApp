@@ -27,7 +27,7 @@ struct MomentDetailView: View {
             ScrollView {
                 VStack(spacing: 32) {
                     // Spacer for nav bar
-                    Color.clear.frame(height: 20)
+                    Color.clear.frame(height: 60)
                     
                     // Mega countdown
                     countdownSection

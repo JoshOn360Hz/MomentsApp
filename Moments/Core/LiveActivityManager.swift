@@ -20,7 +20,6 @@ class LiveActivityManager {
         
         Task {
             let targetDate = Date().addingTimeInterval(3600) // 1 hour from now
-            let timeRemaining: TimeInterval = 3600
             let progress = 0.25 // 25% progress
             
             let attributes = MomentsActivityAttributes(
@@ -32,8 +31,8 @@ class LiveActivityManager {
                 showEndTime: true
             )
             
+            // Native countdown handles time display - we only need progress for the ring
             let contentState = MomentsActivityAttributes.ContentState(
-                timeRemaining: timeRemaining,
                 progress: progress
             )
             
@@ -205,7 +204,8 @@ class LiveActivityManager {
     }
     
     private func createContentState(for moment: Moment) -> MomentsActivityAttributes.ContentState {
-        let timeRemaining = max(moment.timeRemaining, 0)
+        // Native countdown handles time display automatically via Text(timerInterval:)
+        // We only need to track progress for the visual ring
         
         // Use the same enhanced progress calculation as the model
         let totalDuration = moment.targetDate.timeIntervalSince(moment.createdDate)
@@ -225,7 +225,6 @@ class LiveActivityManager {
         let progress = min(max(rawProgress, minProgress), 1.0)
         
         return MomentsActivityAttributes.ContentState(
-            timeRemaining: timeRemaining,
             progress: progress
         )
     }
