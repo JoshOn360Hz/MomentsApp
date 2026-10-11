@@ -84,7 +84,9 @@ struct MomentsLiveActivity: Widget {
                     .font(.caption2)
                     .fontWeight(.medium)
                     .monospacedDigit()
-                    .frame(minWidth: 32)
+                    // Keep the countdown on one line in narrow Dynamic Island regions.
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.5)
             } minimal: {
                 Image(systemName: context.attributes.symbolName)
                     .font(.caption2)

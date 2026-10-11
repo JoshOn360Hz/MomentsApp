@@ -6,7 +6,5 @@
 	<string>Moments needs notification access to remind you about your important countdowns and events.</string>
 	<key>UIApplicationSupportsMultipleScenes</key>
 	<true/>
-	<key>NSSupportsLiveActivities</key>
-	<true/>
 </dict>
 </plist>
